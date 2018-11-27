@@ -128,17 +128,17 @@ export const ManageProfileHOC = (WrappedComponent) => {
 
     isFormDataValid(name, latitude, longitude, radius) {
       if (name !== CONSTS.default) {
-        if (!isLatitudeValid(latitude)) {
+        if (!this.isLatitudeValid(latitude)) {
           Alert.alert('Error', `Latitude '${latitude}' is not a valid value!`);
           return false;
         }
   
-        if (!this.props.isLongitudeValid(longitude)) {
+        if (!this.isLongitudeValid(longitude)) {
           Alert.alert('Error', `Longitude '${longitude}' is not a valid value!`);
           return false;
         }
   
-        if (!this.props.isRadiusValid(radius)) {
+        if (!this.isRadiusValid(radius)) {
           Alert.alert('Error', `Radius '${radius}' is not a valid value!`);
           return false;
         }
@@ -196,25 +196,22 @@ export const ManageProfileHOC = (WrappedComponent) => {
             'message': 'App needs access to your location ' +
                        'so that it can control the volume of your phone.'
           }
-        );
+        );        
   
         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          this.setState({
-            loadingCoordinates: true,
-          });
   
           navigator.geolocation.getCurrentPosition( (e) => {
             const { latitude, longitude } = e.coords,
                   precision = 6;
   
-              this.setState({
-                latitude: latitude.toFixed(precision).toString(),
-                longitude: longitude.toFixed(precision).toString(),
-                loadingCoordinates: false,
-              });
+            this.setState({
+              latitude: latitude.toFixed(precision).toString(),
+              longitude: longitude.toFixed(precision).toString(),
+            });
           }, error => console.log(error),
           {
             maximumAge: 30000,
+            timeout: 0,
           });
         }
       } catch (err) {

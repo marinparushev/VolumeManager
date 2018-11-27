@@ -3,11 +3,8 @@ package com.volumemanager;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.ninty.system.setting.SystemSettingPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.ninty.system.setting.SystemSettingPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.pilloxa.backgroundjob.BackgroundJobPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -29,8 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new RNGestureHandlerPackage(),
 		new SystemSettingPackage(),
-		new RNGestureHandlerPackage(),
 		new BackgroundJobPackage()
       );
     }

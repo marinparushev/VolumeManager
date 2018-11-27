@@ -45,8 +45,8 @@ export default styles = StyleSheet.create({
   },
   flatList: {
     flex: 1,
-    borderColor: 'transparent',
-    borderWidth: 1,
+    // borderColor: 'transparent',
+    // borderWidth: 1,
   },
   flatListItem: {
     alignItems: 'center',

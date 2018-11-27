@@ -69,6 +69,7 @@ export default class Main extends Component {
           data={ this.props.screenProps.profiles }
           keyExtractor={ (item, index) => index.toString() }
           renderItem={ this.renderItem }
+          style={ {borderColor: 'transparent', borderWidth: 1} }
           showsVerticalScrollIndicator={ false }
         />
         <View style={ styles.actionsContainer }>
