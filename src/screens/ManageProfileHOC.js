@@ -3,7 +3,7 @@ import { Alert, PermissionsAndroid } from 'react-native';
 
 import PropTypes from 'prop-types';
 
-import SystemSetting from 'react-native-system-setting';
+import { SystemSettingsUtil } from '../utils/SystemSettingsUtil';
 
 import { CONSTS } from '../constants';
 
@@ -49,7 +49,8 @@ export const ManageProfileHOC = (WrappedComponent) => {
 
     async componentDidMount() {
       const { profile } = this.props.navigation.state.params,
-            locationEnabledPromise = SystemSetting.isLocationEnabled();
+            locationEnabledPromise = SystemSettingsUtil.isLocationEnabled();
+            
 
       if (profile) {
         const {id, name, latitude, longitude, radius, ringVolume, mediaVolume, notificationVolume } = profile
@@ -62,9 +63,9 @@ export const ManageProfileHOC = (WrappedComponent) => {
         });
       } else {
         const name = this.props.navigation.state.params.name || '',
-              ringVolumePromise = SystemSetting.getVolume('ring'),
-              mediaVolumePromise = SystemSetting.getVolume('music'),
-              notificationVolumePromise = SystemSetting.getVolume('notification');
+              ringVolumePromise = SystemSettingsUtil.getVolume('ring'),
+              mediaVolumePromise = SystemSettingsUtil.getVolume('music'),
+              notificationVolumePromise = SystemSettingsUtil.getVolume('notification');
   
         this.setState({ name });
   
@@ -79,11 +80,11 @@ export const ManageProfileHOC = (WrappedComponent) => {
           });
       }
   
-      SystemSetting.addLocationListener(this.onLocationPermissionChange);
+      SystemSettingsUtil.addLocationListener(this.onLocationPermissionChange);
     }
   
     componentWillUnmount() {
-      SystemSetting.removeLocationListener(this.onLocationPermissionChange);
+      SystemSettingsUtil.removeLocationListener(this.onLocationPermissionChange);
     }
 
     isLatitudeValid(latitude) {

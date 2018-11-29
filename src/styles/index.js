@@ -58,6 +58,7 @@ export default styles = StyleSheet.create({
   },
   flatListItemLeft: {
     flex: 1,
+    flexDirection: 'row',
   },
   flatListItemOdd: {
     backgroundColor: '#eee',
@@ -68,6 +69,7 @@ export default styles = StyleSheet.create({
   flatListItemTitle: {
     color: STYLES.mainColor,
     fontSize: 24,
+    marginLeft: 16,
   },
   flatListItemCount: {
     fontSize: 20,

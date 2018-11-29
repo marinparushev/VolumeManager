@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FlatList, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, StatusBar, Text, TouchableOpacity, View } from 'react-native';
 
 import Icon from 'react-native-ionicons';
 
@@ -38,6 +38,10 @@ export default class Main extends Component {
     return (
       <View style={ stylesList }>
         <TouchableOpacity onPress={ () => { this.onEditProfile.call(this, data.item) } } style={ styles.flatListItemLeft }>
+          {
+            this.props.screenProps.activeProfileId === data.item.id &&
+              <Icon name="checkmark" color={ STYLES.mainColor }/>
+          }
           <Text style={ styles.flatListItemTitle }>{data.item.name}</Text>
         </TouchableOpacity>
         { data.item.name !== CONSTS.default &&

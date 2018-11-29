@@ -2,7 +2,9 @@ import { AsyncStorageUtil } from './AsyncStorageUtil';
 import BackgroundJob from 'react-native-background-job';
 import { DistanceUtil } from './DistanceUtil';
 
-import SystemSetting from 'react-native-system-setting';
+import { SystemSettingsUtil } from '../utils/SystemSettingsUtil';
+
+import CONSTS from '../constants';
 
 const CHANGE_VOLUME_JOB = 'changeVolumeJob';
 
@@ -30,9 +32,13 @@ export class BackgroundJobUtil {
             }
           }
 
-          await SystemSetting.setVolume(matchingProfile.ringVolume, { type: 'ring' });
-          await SystemSetting.setVolume(matchingProfile.mediaVolume, { type: 'music' });
-          await SystemSetting.setVolume(matchingProfile.notificationVolume, { type: 'notification' });
+          const { id } = matchingProfile;
+          AsyncStorageUtil.setActiveProfileId(id);
+          dispatchEvent( new CustomEvent(CONSTS.activeProfile, { detail: id }));
+
+          await SystemSettingsUtil.setVolume(matchingProfile.ringVolume, { type: 'ring' });
+          await SystemSettingsUtil.setVolume(matchingProfile.mediaVolume, { type: 'music' });
+          await SystemSettingsUtil.setVolume(matchingProfile.notificationVolume, { type: 'notification' });
         }, error => console.log(error)
         );
       },
@@ -43,10 +49,10 @@ export class BackgroundJobUtil {
       allowWhileIdle: true,
       allowExecutionInForeground: true,
       /* TESTING ONLY */
-      // exact: true,
-      // period: 30000,
+      exact: true,
+      period: 30000,
       /* TESTING ONLY */
-      period: 900000,
+      // period: 900000,
     };
 
     BackgroundJob.register(backgroundJob);

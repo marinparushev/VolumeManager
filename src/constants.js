@@ -6,4 +6,5 @@ export const STYLES = {
 
 export const CONSTS = {
   default: 'Default',
+  activeProfile: 'activeProfile',
 }
