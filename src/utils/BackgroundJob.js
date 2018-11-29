@@ -33,10 +33,8 @@ export class BackgroundJobUtil {
           await SystemSetting.setVolume(matchingProfile.ringVolume, { type: 'ring' });
           await SystemSetting.setVolume(matchingProfile.mediaVolume, { type: 'music' });
           await SystemSetting.setVolume(matchingProfile.notificationVolume, { type: 'notification' });
-        }, error => console.log(error),
-        {
-          maximumAge: 30000,
-        });
+        }, error => console.log(error)
+        );
       },
     };
 

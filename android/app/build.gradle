@@ -137,9 +137,9 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-gesture-handler')
-    compile project(':react-native-system-setting')
-    compile project(':react-native-background-job')
+	implementation project(':react-native-background-job')
+	implementation project(':react-native-system-setting')
+    implementation project(':react-native-gesture-handler')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     compile "com.facebook.react:react-native:+"  // From node_modules

@@ -196,24 +196,24 @@ export const ManageProfileHOC = (WrappedComponent) => {
             'message': 'App needs access to your location ' +
                        'so that it can control the volume of your phone.'
           }
-        );        
-  
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-  
-          navigator.geolocation.getCurrentPosition( (e) => {
-            const { latitude, longitude } = e.coords,
-                  precision = 6;
-  
-            this.setState({
-              latitude: latitude.toFixed(precision).toString(),
-              longitude: longitude.toFixed(precision).toString(),
-            });
-          }, error => console.log(error),
-          {
-            maximumAge: 30000,
-            timeout: 0,
-          });
+        );
+        
+        if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+          Alert.alert('Error!', 'To perform this action the application needs permission to access the device location!');
         }
+  
+        navigator.geolocation.getCurrentPosition( (e) => {
+          const { latitude, longitude } = e.coords,
+                precision = 6;
+
+          //Alert.alert('Success', `Lat ${latitude} Lon ${longitude}`);
+
+          this.setState({
+            latitude: latitude.toFixed(precision).toString(),
+            longitude: longitude.toFixed(precision).toString(),
+          });
+        }, error => Alert.alert(error)
+        );
       } catch (err) {
         Alert.alert(err);
       }
